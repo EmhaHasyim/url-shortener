@@ -12,8 +12,8 @@ urlControler.get('/:shortUrl', async (c) => {
 
     return c.redirect(originalUrl, 301);
 })
-urlControler.basePath('/api')
-urlControler.post('/url', zValidator('json', urlInsertSchema), async (c) => {
+
+urlControler.post('api/url', zValidator('json', urlInsertSchema), async (c) => {
     const urlData = c.req.valid('json')
     const insertUrl = await insertUrlService(urlData)
     return c.json(insertUrl, 201)
