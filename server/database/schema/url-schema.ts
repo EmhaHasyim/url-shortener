@@ -17,6 +17,6 @@ const urlInsertSchema = createSelectSchema(urls, {
     originalUrl: (schema) => schema.url()
 }).omit({ id: true, createdAt: true })
 
-export { urlInsertSchema, urlSchema }
+export { urlInsertSchema, urlSchema, urls }
 
 export type urlInsertType = z.infer<typeof urlInsertSchema>;
