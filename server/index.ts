@@ -10,6 +10,9 @@ app.route('', indexRoute)
 app.onError(async (err, c) => {
     if (err instanceof HTTPException) {
         c.status(err.status)
+        if (err.message === 'Url tidak Ditemukan') {
+            return c.redirect('http://localhost:3000')
+        }
         return c.json({
             errors: {
                 message: err.message
