@@ -177,3 +177,5 @@ dist
 #Drizzle
 
 drizzle
+
+*.db
