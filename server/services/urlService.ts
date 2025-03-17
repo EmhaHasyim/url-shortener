@@ -6,7 +6,7 @@ import { HTTPException } from "hono/http-exception"
 
 const selectUrlService = async (shortUrl: string) => {
 
-    const selectUrl = await db.select().from(urls).where(eq(urls.shortUrl, shortUrl))
+    const selectUrl = await db.select().from(urls).where(eq(urls.shortUrl, shortUrl)).limit(1)
     if (!selectUrl[0]) {
         throw new HTTPException(404, { message: 'Url tidak Ditemukan'})
     }
