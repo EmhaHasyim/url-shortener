@@ -1,10 +1,11 @@
+import ShortUrlForm from "./components/shortenForm/shortenForm"
 
 const App = () => {
 
   return (
     <>
-      <main className='text-center text-5xl py-2'>
-        VITE X REACT
+      <main className='text-center py-2'>
+       <ShortUrlForm/>
       </main>
     </>
   )
