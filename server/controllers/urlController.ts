@@ -6,9 +6,7 @@ import { insertUrlService, selectUrlService } from "../services/urlService";
 const urlControler = new Hono()
     .get('/:shortUrl', async (c) => {
         const param = c.req.param('shortUrl')
-
         const originalUrl = await selectUrlService(param)
-
         return c.redirect(originalUrl, 301);
     })
     .post('api/url', zValidator('json', urlInsertSchema), async (c) => {
