@@ -1,11 +1,13 @@
-import ShortUrlForm from "./components/shortenForm/shortenForm"
+import ShortUrlForm from "./components/shortenPage/shortenForm"
+import ShortenResult from "./components/shortenPage/shortenResult"
 
 const App = () => {
 
   return (
     <>
-      <main className='text-center py-2'>
-       <ShortUrlForm/>
+      <main className='flex flex-col justify-center items-center'>
+        <ShortUrlForm />
+        <ShortenResult />
       </main>
     </>
   )
