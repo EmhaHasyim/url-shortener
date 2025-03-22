@@ -1,24 +1,27 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "@/lib/api";
 import urlFormStore from "./urlFormStore";
 import generateRandomString from "@/lib/generateRandomString";
 
 const useShortenUrl = () => {
 
+    const queryClient = useQueryClient()
     const { urlForm } = urlFormStore()
 
-    const customUrl = urlForm.customUrl.length <= 0 ? generateRandomString() : urlForm.customUrl
-
-    return useQuery({
-        queryKey: ['shortenUrl', urlForm.originalUrl, customUrl],
-        queryFn: async () => {
+    return useMutation({
+        mutationKey: ['shortenUrl'],
+        mutationFn: async () => {
             const res = await api.url.$post({
                 json: {
-                    originalUrl: urlForm.customUrl,
-                    shortUrl: customUrl
+                    originalUrl: urlForm.originalUrl,
+                    shortUrl: urlForm.customUrl || generateRandomString()
                 }
             })
-            return res.json()
+            const data = await res.json()
+            return data
+        },
+        onSuccess: (data) => {
+            queryClient.setQueryData(['shortenResult'], data)
         }
     })
 }
