@@ -1,10 +1,13 @@
+import ShortUrlForm from "./components/shortenPage/shortenForm"
+import ShortenResult from "./components/shortenPage/shortenResult"
 
 const App = () => {
 
   return (
     <>
-      <main className='text-center text-5xl py-2'>
-        VITE X REACT
+      <main className='flex flex-col justify-center items-center'>
+        <ShortUrlForm />
+        <ShortenResult />
       </main>
     </>
   )
