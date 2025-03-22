@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "bun run --watch --bun server/index.ts",
-    "start": "bun run --bun server/index.ts"
+    "start": "bun run --bun server/index.ts",
+    "database": "bunx drizzle-kit generate && bun run server/database/migrate.ts"
   },
   "devDependencies": {
     "@types/bun": "^1.2.5",
