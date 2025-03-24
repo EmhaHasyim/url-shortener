@@ -2,10 +2,11 @@ import useShortenResult from "@/store/shortenUrl/shortenUrlResult";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { useState } from "react";
+import ShortenResultLoading from "./shortenResultLoading";
 
 const ShortenResult = () => {
 
-    const { data, isLoading } = useShortenResult()
+    const { data, isLoading, isPending, isError } = useShortenResult()
 
     const [isCopied, setIsCopied] = useState(false)
 
@@ -20,10 +21,9 @@ const ShortenResult = () => {
                 console.error('Gagal menyalin URL:', error);
             });
     };
-
-    if (!data) return <></>
-    if (!data.originalUrl) return <>Error, pastikan url valid dan ganti custom url jika masih error</>
-    if (isLoading) return <>Loading.....</>
+    if (isError) return <>Error, pastikan url valid dan ganti custom url jika masih error</>
+    if (isLoading) return <ShortenResultLoading />
+    if (isPending) return <></>
     return (
         <>
             <Card className="w-10/12 self-center overflow-hidden">
