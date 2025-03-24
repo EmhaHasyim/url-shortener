@@ -179,3 +179,4 @@ dist
 drizzle
 
 *.db
+*.sqlite
