@@ -1,15 +1,30 @@
 import { Hono } from 'hono'
-import { RegExpRouter } from 'hono/router/reg-exp-router'
 import indexRoute from './routes/indexRoutes'
 import { HTTPException } from 'hono/http-exception'
 import { ZodError } from 'zod'
 import { serveStatic } from 'hono/bun'
 import { SQLiteError } from "bun:sqlite";
+import compress from 'hono-compress'
+import { RegExpRouter } from "hono/router/reg-exp-router";
+import { SmartRouter } from "hono/router/smart-router";
+import { TrieRouter } from "hono/router/trie-router";
+import { cors } from 'hono/cors'
+import { logger } from 'hono/logger'
+import { prettyJSON } from 'hono/pretty-json'
 
-const app = new Hono({ router: new RegExpRouter() })
-const appRoute = app.route('', indexRoute)
-app.use('/*', serveStatic({ root: '/dist' }))
-app.use('/*', serveStatic({ path: '/dist/index.html' }))
+
+const app = new Hono({ router: new SmartRouter({ routers: [new RegExpRouter(), new TrieRouter()] }) })
+    .use('/api/url', cors())
+app.use(compress())
+app.use(logger())
+app.use(prettyJSON())
+app.use('/favicon.ico', serveStatic({ path: '/dist/favicon.ico' }))
+const appRoute = app.route('/', indexRoute)
+app.get('/*', serveStatic({
+    root: './dist',
+    rewriteRequestPath: (path) => path.endsWith('/') ? '/index.html' : path
+}))
+app.notFound(c => c.redirect('/'))
 app.onError(async (err, c) => {
     if (err instanceof HTTPException) {
         c.status(err.status)
@@ -31,7 +46,7 @@ app.onError(async (err, c) => {
     } else if (err instanceof SQLiteError) {
         c.status(400)
         return c.json({
-            erros: {
+            errors: {
                 name: err.name,
                 message: err.message
             }

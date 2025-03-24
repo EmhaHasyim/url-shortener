@@ -20,6 +20,10 @@
     "drizzle-orm": "^0.40.0",
     "drizzle-zod": "^0.7.0",
     "hono": "^4.7.4",
+    "hono-compress": "^0.7.0",
     "zod": "^3.24.2"
+  },
+  "resolutions": {
+    "@mongodb-js/zstd": "^1.2.2"
   }
 }
