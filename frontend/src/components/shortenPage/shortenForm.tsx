@@ -8,7 +8,7 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import useShortenUrl from "@/store/shortenUrl/shortenUrlStore"
+import useShortenUrl from "@/store/shortenUrl/createShortUrl"
 import urlFormStore from "@/store/shortenUrl/urlFormStore"
 import { UrlFormValues } from "@/store/shortenUrl/urlFormStore"
 import { SubmitHandler, useForm } from "react-hook-form"
