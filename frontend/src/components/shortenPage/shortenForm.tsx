@@ -62,7 +62,7 @@ const ShortUrlForm = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit" variant={"secondary"} className="hover:cursor-pointer">Shorten URL</Button>
+                        <Button type="submit" className="hover:cursor-pointer">Shorten URL</Button>
                     </form>
                 </Form>
             </main>
