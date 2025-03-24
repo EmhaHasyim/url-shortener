@@ -62,5 +62,8 @@ app.onError(async (err, c) => {
     }
 })
 
-export default app
+export default {
+    port: Bun.env.PORT || 3000,
+    fetch: app.fetch
+}
 export type AppType = typeof appRoute
