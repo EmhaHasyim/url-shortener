@@ -5,10 +5,10 @@ interface UrlFormStore {
     setUrlForm: (data: {originalUrl: string, customUrl : string}) => void
 }
 
-const urlFormStore = create<UrlFormStore>((set) => ({
+const useUrlFormStore = create<UrlFormStore>((set) => ({
     urlForm: {originalUrl: '', customUrl: ''},
     setUrlForm: (data) => set({urlForm: {originalUrl: data.originalUrl, customUrl: data.customUrl}})
 }));
 
 export type UrlFormValues = UrlFormStore['urlForm'];
-export default urlFormStore;
+export default useUrlFormStore;
